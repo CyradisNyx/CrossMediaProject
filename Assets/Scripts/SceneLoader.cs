@@ -1,18 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void LoadStoryMap()
     {
-        
+        SceneManager.LoadScene("StoryMap");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadEndless()
     {
-        
+        SceneManager.LoadScene("Endless");
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void LoadLevel(string levelNumber)
+    {
+        SceneManager.LoadScene("Level_" + levelNumber);
     }
 }

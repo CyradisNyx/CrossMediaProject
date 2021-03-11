@@ -8,4 +8,40 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/StoryMap.unity
+    guid: cf607df009830fa41bf089b15afe0701
+  - enabled: 1
+    path: Assets/Scenes/Endless.unity
+    guid: d2b8787a44fad374b8d3345fed5f9387
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_1.unity
+    guid: 435a641197be5724ea8479cd0226b6bf
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_2.unity
+    guid: 8be87d753a73e174389e5c33aa1dfe21
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_3.unity
+    guid: 8191b68f78b5ba44186613047135feb3
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_4.unity
+    guid: 5429a9cb4cdd8c24385bdc8f2dafb2e2
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_5.unity
+    guid: cec3556aeaefc384cad1b42910d571e3
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_6.unity
+    guid: 77d2e9813477d3d449d76af8408caaf0
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_7.unity
+    guid: feae72b65cff42c4080735a158acb603
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_8.unity
+    guid: 33d7f1d00af877c4897a7e5d10cfce56
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_9.unity
+    guid: 2a30c9d33f9666745804016924d5f0bf
+  - enabled: 1
+    path: Assets/Scenes/NZLevels/Level_10.unity
+    guid: e668a1f4ddf399c408f87531dc9e6712
   m_configObjects: {}
