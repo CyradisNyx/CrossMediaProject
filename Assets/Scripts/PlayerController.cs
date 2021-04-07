@@ -5,16 +5,55 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool selected = true;
+    public bool selected = false;
     public float moveSpeed = 5f;
     public Transform movePoint;
+    public Transform startPoint;
+    public Collider2D playerCollider;
 
     private void Start()
     {
         movePoint.parent = null;
+        startPoint.parent = null;
+
+        if (playerCollider == null)
+        {
+            playerCollider = gameObject.GetComponent<Collider2D>();
+        }
+
+        EventMaster.Instance.ONStartTurn += OnStartTurn;
+        EventMaster.Instance.ONHighlightedTileClicked += OnHighlightedTileClicked;
     }
 
     private void Update()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+    }
+
+    private void OnMouseDown()
+    {
+        selected = !selected;
+        if (selected)
+        {
+            EventMaster.Instance.SelectPlayer();
+        }
+        else
+        {
+            EventMaster.Instance.DeselectPlayer();
+        }
+    }
+
+    private void OnStartTurn()
+    {
+        startPoint.position = gameObject.transform.position;
+    }
+
+    private void OnHighlightedTileClicked(GameObject which)
+    {
+        movePoint.position = which.transform.position;
+    }
+
+    private void MoveDirectControl()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 

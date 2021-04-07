@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: temp_tilemap_6
+  m_Name: ocean_tile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -4560286572365212265, guid: 4d8f1077a7ccbc246a0a214a9a7e8ca2,
+  m_Sprite: {fileID: -339365416391712167, guid: 4d8f1077a7ccbc246a0a214a9a7e8ca2,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:

@@ -59,6 +59,9 @@ TextureImporter:
   - first:
       213: 9060340126278831697
     second: temp_tilemap_18
+  - first:
+      213: 7355873540486126199
+    second: temp_tilemap_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -175,8 +178,8 @@ TextureImporter:
         y: 48
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,8 +199,8 @@ TextureImporter:
         y: 48
         width: 16
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 6
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
