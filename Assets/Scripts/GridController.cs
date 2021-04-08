@@ -32,20 +32,34 @@ public class GridController : MonoBehaviour
 
         EventMaster.Instance.ONSelectPlayer += OnSelectPlayer;
         EventMaster.Instance.ONDeselectPlayer += OnDeselectPlayer;
+        EventMaster.Instance.ONStartTurn += OnStartTurn;
+        EventMaster.Instance.ONEndTurn += OnEndTurn;
+        
+        OnStartTurn();
     }
 
-    public void OnSelectPlayer()
+    public void OnStartTurn()
     {
         List<Vector3Int> cells = GenerateMovementRange();
         foreach (var cell in cells)
         {
-            HighlightTile(cell);
+            CreateHighlighted(cell);
         }
+    }
+
+    public void OnEndTurn()
+    {
+        DestroyHighlighted();
+    }
+
+    public void OnSelectPlayer()
+    {
+        EnableHighlighted();
     }
 
     public void OnDeselectPlayer()
     {
-        ClearHighlighted();
+        DisableHighlighted();
     }
 
     private List<Vector3Int> GenerateMovementRange()
@@ -68,7 +82,15 @@ public class GridController : MonoBehaviour
         return cells;
     }
 
-    void ClearHighlighted()
+    void CreateHighlighted(Vector3Int cell)
+    {
+        Vector3 worldPos = _grid.CellToWorld(cell);
+        GameObject obj = Instantiate(highlightPrefab, worldPos, Quaternion.identity);
+        obj.SetActive(false);
+        _highlightedTiles.Add(obj);
+    }
+    
+    void DestroyHighlighted()
     {
         foreach (var highlightedTile in _highlightedTiles)
         {
@@ -77,11 +99,20 @@ public class GridController : MonoBehaviour
         _highlightedTiles.Clear();
     }
 
-    void HighlightTile(Vector3Int cell)
+    void EnableHighlighted()
     {
-        Vector3 worldPos = _grid.CellToWorld(cell);
-        GameObject obj = Instantiate(highlightPrefab, worldPos, Quaternion.identity);
-        _highlightedTiles.Add(obj);
+        foreach (var highlightedTile in _highlightedTiles)
+        {
+            highlightedTile.SetActive(true);
+        }
+    }
+
+    void DisableHighlighted()
+    {
+        foreach (var highlightedTile in _highlightedTiles)
+        {
+            highlightedTile.SetActive(false);
+        }
     }
 
     Vector3Int GetPlayerPosition()

@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnHighlightedTileClicked(GameObject which)
     {
-        movePoint.position = which.transform.position;
+        Vector3 newPos = which.transform.position;
+        movePoint.position = new Vector3(newPos.x, newPos.y, gameObject.transform.position.z);
     }
 
     private void MoveDirectControl()
