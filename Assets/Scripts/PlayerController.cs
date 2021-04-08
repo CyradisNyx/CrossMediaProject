@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
             playerCollider = gameObject.GetComponent<Collider2D>();
         }
 
-        EventMaster.Instance.ONStartTurn += OnStartTurn;
+        EventMaster.Instance.ONEndTurn += OnEndTurn;
         EventMaster.Instance.ONHighlightedTileClicked += OnHighlightedTileClicked;
     }
 
@@ -43,9 +43,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnStartTurn()
+    private void OnEndTurn()
     {
-        startPoint.position = gameObject.transform.position;
+        startPoint.position = movePoint.position;
     }
 
     private void OnHighlightedTileClicked(GameObject which)

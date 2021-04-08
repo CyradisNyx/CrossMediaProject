@@ -49,6 +49,7 @@ public class GridController : MonoBehaviour
 
     public void OnEndTurn()
     {
+        Debug.Log("deleting highlighted");
         DestroyHighlighted();
     }
 
@@ -66,6 +67,7 @@ public class GridController : MonoBehaviour
     {
         List<Vector3Int> cells = new List<Vector3Int>();
         Vector3Int currentPosition = GetPlayerPosition();
+        Debug.Log(currentPosition);
         
         cells.Add(currentPosition);
         TileBase currentTile = _tilemap.GetTile(currentPosition);
@@ -94,7 +96,7 @@ public class GridController : MonoBehaviour
     {
         foreach (var highlightedTile in _highlightedTiles)
         {
-            Destroy(highlightedTile);
+            Destroy(highlightedTile.gameObject);
         }
         _highlightedTiles.Clear();
     }

@@ -51,5 +51,6 @@ public class EventMaster : MonoBehaviour
     public void EndTurn()
     {
         ONEndTurn?.Invoke();
+        StartTurn();
     }
 }
