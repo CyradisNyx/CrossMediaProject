@@ -85,11 +85,16 @@ public class GridController : MonoBehaviour
         Vector3Int currentPosition = GetPlayerPosition();
         
         TileBase currentTile = _tilemap.GetTile(currentPosition);
-        int range = _dataFromTiles[currentTile].movementRange;
+        float range = _dataFromTiles[currentTile].movementRange;
 
-        for (int x = currentPosition.x - range; x <= currentPosition.x + range; x++)
+        int left = (int)(currentPosition.x - range - 1);
+        int right = (int)(currentPosition.x + range + 1);
+        int bottom = (int)(currentPosition.y - range - 1);
+        int top = (int)(currentPosition.y + range + 1);
+
+        for (int x = left; x <= right; x++)
         {
-            for (int y = currentPosition.y - range; y <= currentPosition.y + range; y++)
+            for (int y = bottom; y <= top; y++)
             {
                 Vector3Int checkTile = new Vector3Int(x, y, currentPosition.z);
                 if (InsideRange(currentPosition, checkTile, range))

@@ -15,4 +15,4 @@ MonoBehaviour:
   tiles:
   - {fileID: 11400000, guid: b6ea53e6fc88b914e84996ce9f793cf0, type: 2}
   navigable: 1
-  movementRange: 2
+  movementRange: 2.5
