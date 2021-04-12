@@ -66,20 +66,31 @@ public class GridController : MonoBehaviour
     {
         List<Vector3Int> cells = new List<Vector3Int>();
         Vector3Int currentPosition = GetPlayerPosition();
-
-        cells.Add(currentPosition);
+        
         TileBase currentTile = _tilemap.GetTile(currentPosition);
         int range = _dataFromTiles[currentTile].movementRange;
 
-        for (int i = 1; i <= range; i++)
+        for (int x = currentPosition.x - range; x <= currentPosition.x + range; x++)
         {
-            cells.Add(new Vector3Int(currentPosition.x - i, currentPosition.y, currentPosition.z)); // left
-            cells.Add(new Vector3Int(currentPosition.x + i, currentPosition.y, currentPosition.z)); // right
-            cells.Add(new Vector3Int(currentPosition.x, currentPosition.y - i, currentPosition.z)); // down
-            cells.Add(new Vector3Int(currentPosition.x, currentPosition.y + i, currentPosition.z)); // up
+            for (int y = currentPosition.y - range; y <= currentPosition.y + range; y++)
+            {
+                Vector3Int checkTile = new Vector3Int(x, y, currentPosition.z);
+                if (InsideRange(currentPosition, checkTile, range) && _dataFromTiles[_tilemap.GetTile(checkTile)].navigable)
+                {
+                    cells.Add(checkTile);
+                }
+            }
         }
 
         return cells;
+    }
+
+    private bool InsideRange(Vector3Int center, Vector3Int checkTile, float radius)
+    {
+        float dx = center.x - checkTile.x;
+        float dy = center.y - checkTile.y;
+        float distanceSquared = dx * dx + dy * dy;
+        return distanceSquared <= radius * radius;
     }
 
     void CreateHighlighted(Vector3Int cell)
