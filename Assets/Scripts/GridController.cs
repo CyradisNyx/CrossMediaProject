@@ -41,6 +41,7 @@ public class GridController : MonoBehaviour
     public void OnStartTurn()
     {
         List<Vector3Int> cells = GenerateMovementRange();
+        cells = CullMovementViability(cells);
         foreach (var cell in cells)
         {
             CreateHighlighted(cell);
@@ -62,6 +63,22 @@ public class GridController : MonoBehaviour
         DisableHighlighted();
     }
 
+    private List<Vector3Int> CullMovementViability(List<Vector3Int> movementRange)
+    {
+        List<Vector3Int> results = new List<Vector3Int>();
+        foreach (var i in movementRange)
+        {
+            TileBase currentTile = _tilemap.GetTile(i);
+
+            if (_dataFromTiles[currentTile].navigable)
+            {
+                results.Add(i);
+            }
+        }
+
+        return results;
+    }
+
     private List<Vector3Int> GenerateMovementRange()
     {
         List<Vector3Int> cells = new List<Vector3Int>();
@@ -75,7 +92,7 @@ public class GridController : MonoBehaviour
             for (int y = currentPosition.y - range; y <= currentPosition.y + range; y++)
             {
                 Vector3Int checkTile = new Vector3Int(x, y, currentPosition.z);
-                if (InsideRange(currentPosition, checkTile, range) && _dataFromTiles[_tilemap.GetTile(checkTile)].navigable)
+                if (InsideRange(currentPosition, checkTile, range))
                 {
                     cells.Add(checkTile);
                 }
