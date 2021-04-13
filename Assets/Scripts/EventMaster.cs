@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EventMaster : MonoBehaviour
@@ -52,5 +53,17 @@ public class EventMaster : MonoBehaviour
     {
         ONEndTurn?.Invoke();
         StartTurn();
+    }
+
+    public event Action ONCompleteLevel;
+    public void CompleteLevel()
+    {
+        ONCompleteLevel?.Invoke();
+    }
+
+    public event Action ONFailLevel;
+    public void FailLevel()
+    {
+        ONFailLevel?.Invoke();
     }
 }

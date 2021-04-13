@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform movePoint;
     public Transform startPoint;
+    public GameObject levelEnd;
     public Collider2D playerCollider;
 
     private void Start()
@@ -46,6 +47,11 @@ public class PlayerController : MonoBehaviour
     private void OnEndTurn()
     {
         startPoint.position = movePoint.position;
+
+        if (Vector3.Distance(transform.position, levelEnd.transform.position) <= .05f)
+        {
+            EventMaster.Instance.CompleteLevel();
+        }
     }
 
     private void OnHighlightedTileClicked(GameObject which)

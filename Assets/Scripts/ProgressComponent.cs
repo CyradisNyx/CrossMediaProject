@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProgressComponent : MonoBehaviour
 {
     private ProgressData data;
+    public int thisLevel = 0;
 
     public int LastCompletedLevel => data.completedLevel;
     public int CurrentMoney => data.money;
@@ -12,6 +13,8 @@ public class ProgressComponent : MonoBehaviour
     public void Awake()
     {
         data = SaveSystem.LoadProgress();
+
+        EventMaster.Instance.ONCompleteLevel += Complete;
     }
 
     public void Spend(int howMuch)
@@ -26,10 +29,11 @@ public class ProgressComponent : MonoBehaviour
         UpdateSaveData();
     }
 
-    public void Complete(int level)
+    public void Complete()
     {
-        data.completedLevel = level;
+        data.completedLevel = thisLevel;
         UpdateSaveData();
+        Time.timeScale = 0;
     }
 
     public void UpdateSaveData()
