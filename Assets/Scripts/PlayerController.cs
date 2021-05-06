@@ -48,8 +48,9 @@ public class PlayerController : MonoBehaviour
     {
         startPoint.position = movePoint.position;
 
-        if (Vector3.Distance(transform.position, levelEnd.transform.position) <= .05f)
+        if (Compare2D(transform.position, levelEnd.transform.position))
         {
+            Debug.Log("complete level");
             EventMaster.Instance.CompleteLevel();
         }
     }
@@ -58,6 +59,19 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 newPos = which.transform.position;
         movePoint.position = new Vector3(newPos.x, newPos.y, gameObject.transform.position.z);
+    }
+
+    private bool Compare2D(Vector3 a, Vector3 b)
+    {
+        Vector2 a2 = new Vector2(a.x, a.y);
+        Vector2 b2 = new Vector2(b.x, b.y);
+
+        if (Vector2.Distance(a, b) <= .05f)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void MoveDirectControl()

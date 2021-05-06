@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951de2f7c1d42f6baad99c8e5864730, type: 3}
+  m_Name: HouseTileData
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: f3ae379ffdaf41b4f89146cfad65619b, type: 2}
+  navigable: 1
+  movementRange: 1.5
