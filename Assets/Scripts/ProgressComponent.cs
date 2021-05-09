@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
@@ -6,15 +7,38 @@ public class ProgressComponent : MonoBehaviour
 {
     private ProgressData data;
     public int thisLevel = 0;
+    public bool resetOnLoad = false;
 
     public int LastCompletedLevel => data.completedLevel;
     public int CurrentMoney => data.money;
 
+    public bool CoinsCollected
+    {
+        get
+        {
+            if (data.coinsCollected.ContainsKey(thisLevel))
+            {
+                return data.coinsCollected[thisLevel];
+            }
+            else
+            {
+                //data.coinsCollected.Add(thisLevel, false);
+                return false;
+            }
+        }
+    }
+
     public void Awake()
     {
+        if (resetOnLoad)
+        {
+            SaveSystem.ClearProgress();
+        }
+        
         data = SaveSystem.LoadProgress();
 
         EventMaster.Instance.ONCompleteLevel += Complete;
+        EventMaster.Instance.ONCollectCoin += Earn;
     }
 
     public void Spend(int howMuch)
@@ -26,6 +50,7 @@ public class ProgressComponent : MonoBehaviour
     public void Earn(int howMuch)
     {
         data.money += howMuch;
+        data.coinsCollected.Add(thisLevel, true);
         UpdateSaveData();
     }
 

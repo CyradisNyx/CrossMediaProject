@@ -10,17 +10,38 @@ public class PlayerController : MonoBehaviour
     public Transform movePoint;
     public Transform startPoint;
     public GameObject levelEnd;
+    public GameObject coin;
     public Collider2D playerCollider;
 
     private void Start()
     {
-        movePoint.parent = null;
-        startPoint.parent = null;
+        if (movePoint == null)
+        {
+            movePoint = gameObject.transform.Find("Player Move Point");
+        }
+        
+        if (startPoint == null)
+        {
+            startPoint = gameObject.transform.Find("Player Start Point");
+        }
+
+        if (levelEnd == null)
+        {
+            levelEnd = gameObject.transform.parent.Find("LevelEnd").gameObject;
+        }
+        
+        if (coin == null)
+        {
+            coin = gameObject.transform.parent.Find("Coin").gameObject;
+        }
 
         if (playerCollider == null)
         {
             playerCollider = gameObject.GetComponent<Collider2D>();
         }
+        
+        movePoint.parent = null;
+        startPoint.parent = null;
 
         EventMaster.Instance.ONEndTurn += OnEndTurn;
         EventMaster.Instance.ONHighlightedTileClicked += OnHighlightedTileClicked;
@@ -52,6 +73,13 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("complete level");
             EventMaster.Instance.CompleteLevel();
+        }
+
+        if (Compare2D(transform.position, coin.transform.position))
+        {
+            Debug.Log("collect coin");
+            EventMaster.Instance.CollectCoin(coin.GetComponent<CoinComponent>().coinValue);
+            coin.SetActive(false);
         }
     }
 

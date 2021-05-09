@@ -66,4 +66,11 @@ public class EventMaster : MonoBehaviour
     {
         ONFailLevel?.Invoke();
     }
+
+    public event Action<int> ONCollectCoin;
+
+    public void CollectCoin(int howMuch)
+    {
+        ONCollectCoin?.Invoke(howMuch);
+    }
 }
