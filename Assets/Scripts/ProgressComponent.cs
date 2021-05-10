@@ -7,6 +7,7 @@ public class ProgressComponent : MonoBehaviour
 {
     private ProgressData data;
     public int thisLevel = 0;
+    public int maxTurns = 5;
     public bool resetOnLoad = false;
 
     public int LastCompletedLevel => data.completedLevel;

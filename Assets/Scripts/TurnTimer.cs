@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class TurnTimer : MonoBehaviour
 {
+    public ProgressComponent progress;
     public Text turnText;
     public int currentTurn = 0;
     public int maxTurn = 5;
@@ -14,6 +15,12 @@ public class TurnTimer : MonoBehaviour
         {
             turnText = transform.GetComponentInChildren<Text>();
         }
+        if (progress == null)
+        {
+            progress = GameObject.Find("PlayerProgress").GetComponent<ProgressComponent>();
+        }
+
+        maxTurn = progress.maxTurns;
         turnText.text = $"Turn {currentTurn}/{maxTurn}";
 
         EventMaster.Instance.ONEndTurn += OnEndTurn;
