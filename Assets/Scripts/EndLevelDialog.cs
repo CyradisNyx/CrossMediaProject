@@ -1,19 +1,36 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DefaultNamespace
-{
-    public class EndLevelDialog : MonoBehaviour
-    {
-        public void Start()
-        {
-            EventMaster.Instance.ONCompleteLevel += OnCompleteLevel;
-            gameObject.SetActive(false);
-        }
 
-        public void OnCompleteLevel()
+public class EndLevelDialog : MonoBehaviour
+{
+    public GameObject complete;
+    public GameObject fail;
+    
+    public void Start()
+    {
+        if (complete == null)
         {
-            gameObject.SetActive(true);
+            complete = transform.Find("CompleteLevel").gameObject;
         }
+        if (fail == null)
+        {
+            fail = transform.Find("FailLevel").gameObject;
+        }
+        
+        EventMaster.Instance.ONCompleteLevel += OnCompleteLevel;
+        EventMaster.Instance.ONFailLevel += OnFailLevel;
+        complete.SetActive(false);
+        fail.SetActive(false);
+    }
+
+    public void OnCompleteLevel()
+    {
+        complete.SetActive(true);
+    }
+
+    public void OnFailLevel()
+    {
+        fail.SetActive(true);
     }
 }

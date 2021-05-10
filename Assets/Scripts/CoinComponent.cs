@@ -25,6 +25,9 @@ public class CoinComponent : MonoBehaviour
 
     public void OnCompleteLevel()
     {
-        progressComponent.Earn(coinValue);
+        if (collected)
+        {
+            progressComponent.Earn(coinValue);
+        }
     }
 }
