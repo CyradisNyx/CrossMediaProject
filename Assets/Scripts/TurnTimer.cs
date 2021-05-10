@@ -30,8 +30,9 @@ public class TurnTimer : MonoBehaviour
     {
         currentTurn++;
         turnText.text = $"Turn {currentTurn}/{maxTurn}";
-        if (currentTurn == maxTurn)
+        if (currentTurn > maxTurn)
         {
+            Debug.Log("Failed Level in TurnTimer");
             EventMaster.Instance.FailLevel();
         }
     }

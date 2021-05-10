@@ -414,8 +414,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1177693096}
   - {fileID: 1982671417}
+  - {fileID: 1177693096}
   m_Father: {fileID: 2125856656}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -510,7 +510,7 @@ TilemapRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.5, y: 0.5, z: 0}
+  m_ChunkCullingBounds: {x: 0.5006254, y: 0.5006254, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -6102,7 +6102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisLevel: 1
   maxTurns: 5
-  resetOnLoad: 1
+  resetOnLoad: 0
 --- !u!1 &1160676091
 GameObject:
   m_ObjectHideFlags: 0
@@ -6182,7 +6182,7 @@ RectTransform:
   m_Children:
   - {fileID: 1631064161}
   m_Father: {fileID: 182769857}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6342,7 +6342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255199563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.66, y: 0.4, z: 0}
+  m_LocalPosition: {x: -1.66, y: 0.4, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 215918607}
@@ -6933,7 +6933,7 @@ RectTransform:
   m_Children:
   - {fileID: 1590459084}
   m_Father: {fileID: 182769857}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

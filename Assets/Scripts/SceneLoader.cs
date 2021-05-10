@@ -22,6 +22,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLevel(string levelNumber)
     {
+        Debug.Log("Loading...");
         SceneManager.LoadScene("Level_" + levelNumber);
     }
 }

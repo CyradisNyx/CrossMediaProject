@@ -8,11 +8,13 @@ public class StarChecker : MonoBehaviour
 {
     public int levelID;
     public Image coverImage;
+    public GameObject cloudCover;
     public ProgressComponent progressComponent;
 
     private bool revealing;
     private float revealSpeed = 0.8f;
-    
+    private float cullDistance;
+
     void Start()
     {
         // Check if ID is unlocked in save file
