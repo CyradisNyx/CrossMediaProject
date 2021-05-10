@@ -7,22 +7,25 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadStoryMap()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("StoryMap");
     }
 
     public void LoadEndless()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Endless");
     }
 
     public void LoadMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
 
     public void LoadLevel(string levelNumber)
     {
-        Debug.Log("Loading...");
+        Time.timeScale = 1;
         SceneManager.LoadScene("Level_" + levelNumber);
     }
 }

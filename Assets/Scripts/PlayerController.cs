@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
         EventMaster.Instance.ONHighlightedTileClicked += OnHighlightedTileClicked;
     }
 
+    public void OnDestroy()
+    {
+        EventMaster.Instance.ONEndTurn -= OnEndTurn;
+        EventMaster.Instance.ONHighlightedTileClicked -= OnHighlightedTileClicked;
+    }
+
     private void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);

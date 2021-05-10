@@ -23,6 +23,11 @@ public class CoinComponent : MonoBehaviour
         EventMaster.Instance.ONCompleteLevel += OnCompleteLevel;
     }
 
+    public void OnDestroy()
+    {
+        EventMaster.Instance.ONCompleteLevel -= OnCompleteLevel;
+    }
+
     public void OnCompleteLevel()
     {
         if (collected)

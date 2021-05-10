@@ -37,7 +37,15 @@ public class StarChecker : MonoBehaviour
 
     public void Update()
     {
-        if (revealing) {Reveal();}
+        if (revealing)
+        {
+            Reveal();
+        }
+
+        if (cloudCover)
+        {
+            LiftClouds();
+        }
     }
 
     public void Reveal()
@@ -54,6 +62,18 @@ public class StarChecker : MonoBehaviour
             float tempAlpha = originalColor.a;
             tempAlpha -= revealSpeed * Time.deltaTime;
             coverImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, tempAlpha);
+        }
+    }
+
+    public void LiftClouds()
+    {
+        var transformPosition = cloudCover.transform.position;
+            transformPosition.y += 100 * Time.deltaTime;
+            cloudCover.transform.position = transformPosition;
+            
+        if (transformPosition.y < 0 || transformPosition.y > Screen.height)
+        {
+            Destroy(cloudCover);
         }
     }
 }

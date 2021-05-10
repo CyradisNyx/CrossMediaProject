@@ -37,8 +37,17 @@ public class ProgressComponent : MonoBehaviour
         }
         
         data = SaveSystem.LoadProgress();
+        Debug.Log(LastCompletedLevel);
+    }
 
-        EventMaster.Instance.ONCompleteLevel += Complete;
+    public void Start()
+    {
+        EventMaster.Instance.ONCompleteLevel += OnCompleteLevel;
+    }
+
+    public void OnDestroy()
+    {
+        EventMaster.Instance.ONCompleteLevel -= OnCompleteLevel;
     }
 
     public void Spend(int howMuch)
@@ -54,9 +63,10 @@ public class ProgressComponent : MonoBehaviour
         UpdateSaveData();
     }
 
-    public void Complete()
+    public void OnCompleteLevel()
     {
-        data.completedLevel = thisLevel;
+        Debug.Log("Complete!!!");
+        data.completedLevel = Math.Max(thisLevel, data.completedLevel);
         UpdateSaveData();
         Time.timeScale = 0;
     }

@@ -38,6 +38,13 @@ public class GridController : MonoBehaviour
         OnStartTurn();
     }
 
+    public void OnDestroy()
+    {
+        EventMaster.Instance.ONSelectPlayer -= OnSelectPlayer;
+        EventMaster.Instance.ONDeselectPlayer -= OnDeselectPlayer;
+        EventMaster.Instance.ONStartTurn -= OnStartTurn;
+        EventMaster.Instance.ONEndTurn -= OnEndTurn;    }
+
     public void OnStartTurn()
     {
         List<Vector3Int> cells = GenerateMovementRange();

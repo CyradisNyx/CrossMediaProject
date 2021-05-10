@@ -24,6 +24,12 @@ public class EndLevelDialog : MonoBehaviour
         fail.SetActive(false);
     }
 
+    public void OnDestroy()
+    {
+        EventMaster.Instance.ONCompleteLevel -= OnCompleteLevel;
+        EventMaster.Instance.ONFailLevel -= OnFailLevel;
+    }
+
     public void OnCompleteLevel()
     {
         complete.SetActive(true);

@@ -26,6 +26,11 @@ public class TurnTimer : MonoBehaviour
         EventMaster.Instance.ONEndTurn += OnEndTurn;
     }
 
+    public void OnDestroy()
+    {
+        EventMaster.Instance.ONEndTurn -= OnEndTurn;
+    }
+
     public void OnEndTurn()
     {
         currentTurn++;
