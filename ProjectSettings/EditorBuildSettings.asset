@@ -38,10 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NZLevels/Level_8.unity
     guid: 33d7f1d00af877c4897a7e5d10cfce56
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NZLevels/Level_9.unity
     guid: 2a30c9d33f9666745804016924d5f0bf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NZLevels/Level_10.unity
     guid: e668a1f4ddf399c408f87531dc9e6712
   m_configObjects: {}
