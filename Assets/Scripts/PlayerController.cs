@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         if (Compare2D(transform.position, coin.transform.position))
         {
             Debug.Log("collect coin");
-            EventMaster.Instance.CollectCoin(coin.GetComponent<CoinComponent>().coinValue);
+            coin.GetComponent<CoinComponent>().collected = true;
             coin.SetActive(false);
         }
     }

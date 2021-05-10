@@ -38,7 +38,6 @@ public class ProgressComponent : MonoBehaviour
         data = SaveSystem.LoadProgress();
 
         EventMaster.Instance.ONCompleteLevel += Complete;
-        EventMaster.Instance.ONCollectCoin += Earn;
     }
 
     public void Spend(int howMuch)
