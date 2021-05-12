@@ -5,15 +5,15 @@ public class MobileResolution : MonoBehaviour
 {
     private int LastWidth = 0;
     private int LastHeight = 0;
-    private float sceneWidth = 13;
-    private PixelPerfectCamera _camera;
+    private float sceneWidth = 17;
+    private Camera _camera;
 
     public void Start()
     {
-        _camera = GetComponent<PixelPerfectCamera>();
+        _camera = GetComponent<Camera>();
     }
     
-    public void Update ()
+    public void FixedUpdate ()
     {
         KeepAspectRatio();
         AdjustCameraSize();
@@ -23,7 +23,7 @@ public class MobileResolution : MonoBehaviour
     {
         float unitsPerPixel = sceneWidth / Screen.width;
         float desiredHalfHeight = 0.5f * unitsPerPixel * Screen.height;
-        _camera.assetsPPU = (int) desiredHalfHeight;
+        _camera.orthographicSize = (int) desiredHalfHeight;
     }
 
     public void KeepAspectRatio()
