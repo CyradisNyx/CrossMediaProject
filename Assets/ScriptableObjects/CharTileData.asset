@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7951de2f7c1d42f6baad99c8e5864730, type: 3}
-  m_Name: FarmTileData
+  m_Name: CharTileData
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: 109a4d2868285cf45a7dd790749c16fe, type: 2}
+  - {fileID: 11400000, guid: 06c1992713fba224da92a39a3b1c9363, type: 2}
   navigable: 1
-  flammable: 1
   movementRange: 1.5

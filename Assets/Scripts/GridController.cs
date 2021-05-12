@@ -9,11 +9,12 @@ public class GridController : MonoBehaviour
     public PlayerController player;
     public GameObject highlightPrefab;
     public List<TileData> tileData;
-
+    
     private Grid _grid;
     private Tilemap _tilemap;
     private List<GameObject> _highlightedTiles;
     private Dictionary<TileBase, TileData> _dataFromTiles;
+    private FireController _fireController;
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class GridController : MonoBehaviour
         _tilemap = gameObject.GetComponentInChildren<Tilemap>();
         _highlightedTiles = new List<GameObject>();
         _dataFromTiles = new Dictionary<TileBase, TileData>();
+        _fireController = gameObject.GetComponentInChildren<FireController>();
 
         foreach (var data in tileData)
         {
@@ -43,15 +45,22 @@ public class GridController : MonoBehaviour
         EventMaster.Instance.ONSelectPlayer -= OnSelectPlayer;
         EventMaster.Instance.ONDeselectPlayer -= OnDeselectPlayer;
         EventMaster.Instance.ONStartTurn -= OnStartTurn;
-        EventMaster.Instance.ONEndTurn -= OnEndTurn;    }
+        EventMaster.Instance.ONEndTurn -= OnEndTurn;
+    }
 
     public void OnStartTurn()
     {
-        List<Vector3Int> cells = GenerateMovementRange();
+        List<Vector3Int> cells = GenerateRange(GetGridPosition(player.startPoint.gameObject));
         cells = CullMovementViability(cells);
         foreach (var cell in cells)
         {
             CreateHighlighted(cell);
+        }
+
+        if (_fireController)
+        {
+            SpreadFire();
+            CreateChar();
         }
     }
 
@@ -70,6 +79,27 @@ public class GridController : MonoBehaviour
         DisableHighlighted();
     }
 
+    private void SpreadFire()
+    {
+        foreach (var flameObject in _fireController.flameObjects)
+        {
+            Vector3Int gridPos = _grid.WorldToCell(flameObject.transform.position);
+        }
+    }
+
+    private void CreateChar()
+    {
+        foreach (var flameObject in _fireController.flameObjects)
+        {
+            Vector3Int gridPos = _grid.WorldToCell(flameObject.transform.position);
+            TileBase currentTile = _tilemap.GetTile(gridPos);
+            if (currentTile.name != "char")
+            {
+                _tilemap.SetTile(gridPos, _fireController.charTile);
+            }
+        }
+    }
+
     private List<Vector3Int> CullMovementViability(List<Vector3Int> movementRange)
     {
         List<Vector3Int> results = new List<Vector3Int>();
@@ -86,31 +116,29 @@ public class GridController : MonoBehaviour
         return results;
     }
 
-    private List<Vector3Int> GenerateMovementRange()
+    private List<Vector3Int> GenerateRange(Vector3Int centerPos)
     {
         List<Vector3Int> cells = new List<Vector3Int>();
-        Vector3Int currentPosition = GetPlayerPosition();
-        
-        TileBase currentTile = _tilemap.GetTile(currentPosition);
+
+        TileBase currentTile = _tilemap.GetTile(centerPos);
         float range = _dataFromTiles[currentTile].movementRange;
 
-        int left = (int)(currentPosition.x - range - 1);
-        int right = (int)(currentPosition.x + range + 1);
-        int bottom = (int)(currentPosition.y - range - 1);
-        int top = (int)(currentPosition.y + range + 1);
+        int left = (int)(centerPos.x - range - 1);
+        int right = (int)(centerPos.x + range + 1);
+        int bottom = (int)(centerPos.y - range - 1);
+        int top = (int)(centerPos.y + range + 1);
 
         for (int x = left; x <= right; x++)
         {
             for (int y = bottom; y <= top; y++)
             {
-                Vector3Int checkTile = new Vector3Int(x, y, currentPosition.z);
-                if (InsideRange(currentPosition, checkTile, range))
+                Vector3Int checkTile = new Vector3Int(x, y, centerPos.z);
+                if (InsideRange(centerPos, checkTile, range))
                 {
                     cells.Add(checkTile);
                 }
             }
         }
-
         return cells;
     }
 
@@ -155,8 +183,8 @@ public class GridController : MonoBehaviour
         }
     }
 
-    Vector3Int GetPlayerPosition()
+    Vector3Int GetGridPosition(GameObject obj)
     {
-        return _grid.WorldToCell(player.startPoint.position);
+        return _grid.WorldToCell(obj.transform.position);
     }
 }
