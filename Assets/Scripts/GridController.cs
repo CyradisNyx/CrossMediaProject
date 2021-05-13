@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -59,6 +60,7 @@ public class GridController : MonoBehaviour
 
         if (_fireController)
         {
+            KillFire();
             SpreadFire();
             CreateChar();
         }
@@ -79,19 +81,101 @@ public class GridController : MonoBehaviour
         DisableHighlighted();
     }
 
+    private void KillFire()
+    {
+        List<GameObject> toKill = new List<GameObject>();
+        
+        foreach (var o in _fireController.flameObjects)
+        {
+            Vector3Int gridPos = GetGridPosition(o);
+            List<Vector3Int> surrounds = GenerateRange(gridPos, _fireController.flameRange);
+            
+            // Check if all surrounds are flammable
+            bool flammable = false;
+            foreach (var i in surrounds)
+            {
+                TileBase currentTile = _tilemap.GetTile(i);
+
+                if (_dataFromTiles[currentTile].flammable)
+                {
+                    flammable = true;
+                }
+            }
+            
+            if (!flammable)
+            {
+                toKill.Add(o);
+            }
+        }
+
+        foreach (var o in toKill)
+        {
+            _fireController.flameObjects.Remove(o);
+            Destroy(o);
+        }
+    }
+
     private void SpreadFire()
     {
+        List<Vector3Int> flameSpots = new List<Vector3Int>();
         foreach (var flameObject in _fireController.flameObjects)
         {
-            Vector3Int gridPos = _grid.WorldToCell(flameObject.transform.position);
+            Vector3Int gridPos = GetGridPosition(flameObject);
+            flameSpots.AddRange(GenerateRange(gridPos, _fireController.flameRange));
         }
+        
+        // Cull Flames
+        flameSpots = flameSpots.Distinct().ToList();
+        flameSpots = CullFire(flameSpots);
+        
+        // Create new flames
+        foreach (var i in flameSpots)
+        {
+            CreateFlame(i);
+        }
+    }
+
+    private void CreateFlame(Vector3Int gridPos)
+    {
+        Vector3 worldPos = _grid.CellToWorld(gridPos);
+        GameObject flamePrefab = _fireController.flameObjects[0];
+        GameObject obj = Instantiate(flamePrefab, worldPos, Quaternion.identity);
+        obj.transform.parent = _fireController.transform;
+        _fireController.flameObjects.Add(obj);
+    }
+
+    private List<Vector3Int> CullFire(List<Vector3Int> flameSpots)
+    {
+        List<Vector3Int> alreadyAlight = new List<Vector3Int>();
+        foreach (var o in _fireController.flameObjects)
+        {
+            alreadyAlight.Add(GetGridPosition(o));
+        }
+        
+        List<Vector3Int> flammable = new List<Vector3Int>();
+        foreach (var i in flameSpots)
+        {
+            TileBase currentTile = _tilemap.GetTile(i);
+
+            // Check if tile can be set on fire
+            if (_dataFromTiles[currentTile].flammable)
+            {
+                // Check if tile is already on fire
+                if (!alreadyAlight.Contains(i))
+                {
+                    flammable.Add(i);
+                }
+            }
+        }
+
+        return flammable;
     }
 
     private void CreateChar()
     {
         foreach (var flameObject in _fireController.flameObjects)
         {
-            Vector3Int gridPos = _grid.WorldToCell(flameObject.transform.position);
+            Vector3Int gridPos = GetGridPosition(flameObject);
             TileBase currentTile = _tilemap.GetTile(gridPos);
             if (currentTile.name != "char")
             {
@@ -116,12 +200,15 @@ public class GridController : MonoBehaviour
         return results;
     }
 
-    private List<Vector3Int> GenerateRange(Vector3Int centerPos)
+    private List<Vector3Int> GenerateRange(Vector3Int centerPos, float range = 0)
     {
         List<Vector3Int> cells = new List<Vector3Int>();
 
         TileBase currentTile = _tilemap.GetTile(centerPos);
-        float range = _dataFromTiles[currentTile].movementRange;
+        if (range <= 0)
+        {
+            range = _dataFromTiles[currentTile].movementRange;
+        }
 
         int left = (int)(centerPos.x - range - 1);
         int right = (int)(centerPos.x + range + 1);
