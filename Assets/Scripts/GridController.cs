@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class GridController : MonoBehaviour
@@ -16,6 +17,7 @@ public class GridController : MonoBehaviour
     private List<GameObject> _highlightedTiles;
     private Dictionary<TileBase, TileData> _dataFromTiles;
     private FireController _fireController;
+    private HumanController _humanController;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class GridController : MonoBehaviour
         _highlightedTiles = new List<GameObject>();
         _dataFromTiles = new Dictionary<TileBase, TileData>();
         _fireController = gameObject.GetComponentInChildren<FireController>();
+        _humanController = gameObject.GetComponentInChildren<HumanController>();
 
         foreach (var data in tileData)
         {
@@ -64,6 +67,12 @@ public class GridController : MonoBehaviour
             SpreadFire();
             CreateChar();
         }
+
+        if (_humanController)
+        {
+            AffectCurrent();
+            Move();
+        }
     }
 
     public void OnEndTurn()
@@ -79,6 +88,52 @@ public class GridController : MonoBehaviour
     public void OnDeselectPlayer()
     {
         DisableHighlighted();
+    }
+
+    private void AffectCurrent()
+    {
+        foreach (var o in _humanController.cutterObjects)
+        {
+            Vector3Int gridPos = GetGridPosition(o);
+            TileBase currentTile = _tilemap.GetTile(gridPos);
+            if (currentTile == _humanController.forestTile)
+            {
+                _tilemap.SetTile(gridPos, _humanController.grassTile);
+            }
+
+            if (currentTile == _humanController.grassTile)
+            {
+                _tilemap.SetTile(gridPos, _humanController.houseTile);
+            }
+        }
+    }
+
+    private void Move()
+    {
+        foreach (var o in _humanController.cutterObjects)
+        {
+            Vector3Int gridPos = GetGridPosition(o);
+            TileBase currentTile = _tilemap.GetTile(gridPos);
+            if (currentTile == _humanController.forestTile || currentTile == _humanController.grassTile)
+            {
+                continue;
+            }
+            // Generate and shuffle possible new spots
+            List<Vector3Int> surrounds = GenerateRange(gridPos, _humanController.lookRange);
+            surrounds = surrounds.OrderBy(x => Guid.NewGuid()).ToList();
+            foreach (var i in surrounds)
+            {
+                TileBase possibleTile = _tilemap.GetTile(i);
+                if (
+                    possibleTile == _humanController.forestTile ||
+                    possibleTile == _humanController.grassTile
+                    )
+                {
+                    o.transform.position = _grid.CellToWorld(i);
+                    break;
+                }
+            }
+        }
     }
 
     private void KillFire()

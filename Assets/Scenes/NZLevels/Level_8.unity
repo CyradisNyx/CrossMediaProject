@@ -193,6 +193,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelDefaults
       objectReference: {fileID: 0}
+    - target: {fileID: 4671775538590477494, guid: 62d20f56b4d802b449a1b99f0f1a8374,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4671775539558257125, guid: 62d20f56b4d802b449a1b99f0f1a8374,
         type: 3}
       propertyPath: thisLevel
