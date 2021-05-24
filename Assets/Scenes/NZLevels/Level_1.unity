@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &70306059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3227704753456513838, guid: 62d20f56b4d802b449a1b99f0f1a8374,
+    type: 3}
+  m_PrefabInstance: {fileID: 4671775538504774774}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97876899403af7c4db57e58231daccfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4671775538504774774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,6 +200,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 4671775538469781965, guid: 62d20f56b4d802b449a1b99f0f1a8374,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 70306059}
     - target: {fileID: 4671775538590477494, guid: 62d20f56b4d802b449a1b99f0f1a8374,
         type: 3}
       propertyPath: m_IsActive
@@ -197,6 +214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671775539558257125, guid: 62d20f56b4d802b449a1b99f0f1a8374,
+        type: 3}
+      propertyPath: maxTurns
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62d20f56b4d802b449a1b99f0f1a8374, type: 3}

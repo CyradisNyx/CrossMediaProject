@@ -246,12 +246,30 @@ public class GridController : MonoBehaviour
         {
             TileBase currentTile = _tilemap.GetTile(i);
 
-            if (_dataFromTiles[currentTile].navigable)
+            if (!_dataFromTiles[currentTile].navigable)
             {
-                results.Add(i);
+                continue;
             }
-        }
 
+            if (_humanController)
+            {
+                if (_humanController.isBlocked(_grid.CellToWorld(i)))
+                {
+                    continue;
+                }
+            }
+
+            if (_fireController)
+            {
+                if (_fireController.isBlocked(_grid.CellToWorld(i)))
+                {
+                    continue;
+                }
+            }
+
+            results.Add(i);
+        }
+        Debug.Log(results);
         return results;
     }
 

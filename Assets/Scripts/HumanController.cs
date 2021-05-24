@@ -21,4 +21,17 @@ public class HumanController : MonoBehaviour
             cutterObjects.Add(child.gameObject);
         }
     }
+
+    public bool isBlocked(Vector3 pos)
+    {
+        foreach (var cutterObject in cutterObjects)
+        {
+            if (cutterObject.transform.position == pos)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

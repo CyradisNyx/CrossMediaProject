@@ -17,4 +17,17 @@ public class FireController : MonoBehaviour
             flameObjects.Add(child.gameObject);
         }
     }
+    
+    public bool isBlocked(Vector3 pos)
+    {
+        foreach (var flameObject in flameObjects)
+        {
+            if (flameObject.transform.position == pos)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -7,7 +7,7 @@ public class TurnTimer : MonoBehaviour
     public ProgressComponent progress;
     public Text turnText;
     public int currentTurn = 0;
-    public int maxTurn = 5;
+    public int maxTurn = 6;
 
     public void Start()
     {
@@ -35,7 +35,7 @@ public class TurnTimer : MonoBehaviour
     {
         currentTurn++;
         turnText.text = $"Turn {currentTurn}/{maxTurn}";
-        if (currentTurn > maxTurn)
+        if (currentTurn >= maxTurn)
         {
             Debug.Log("Failed Level in TurnTimer");
             EventMaster.Instance.FailLevel();

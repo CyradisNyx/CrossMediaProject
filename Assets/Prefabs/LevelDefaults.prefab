@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 4671775538469781963}
   - component: {fileID: 4671775538469781962}
   - component: {fileID: 4671775538469781965}
+  - component: {fileID: 3227704753456513838}
   m_Layer: 5
   m_Name: EndTurn
   m_TagString: Untagged
@@ -648,7 +649,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4671775538683331503}
+      - m_Target: {fileID: 3227704753456513838}
         m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:
@@ -659,6 +660,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3227704753456513838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671775538469781967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97876899403af7c4db57e58231daccfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4671775538590477494
 GameObject:
   m_ObjectHideFlags: 0
@@ -6593,7 +6606,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f5872071e4ea84e49be34e479aecfb87, type: 2}
   - {fileID: 11400000, guid: 3bc3552f60fad904a81554a17f61dea2, type: 2}
   - {fileID: 11400000, guid: 16e722aa3bd96de4c857ba6e9038c49e, type: 2}
-  fireController: {fileID: 0}
 --- !u!1 &4671775539723353436
 GameObject:
   m_ObjectHideFlags: 0

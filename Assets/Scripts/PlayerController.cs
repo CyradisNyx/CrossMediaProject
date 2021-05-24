@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         movePoint.parent = null;
         startPoint.parent = null;
 
+        EventMaster.Instance.ONStartTurn += OnStartTurn;
         EventMaster.Instance.ONEndTurn += OnEndTurn;
         EventMaster.Instance.ONHighlightedTileClicked += OnHighlightedTileClicked;
     }
@@ -69,6 +70,11 @@ public class PlayerController : MonoBehaviour
         {
             EventMaster.Instance.DeselectPlayer();
         }
+    }
+
+    private void OnStartTurn()
+    {
+        selected = false;
     }
 
     private void OnEndTurn()

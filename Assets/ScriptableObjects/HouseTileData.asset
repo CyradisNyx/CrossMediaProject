@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3ae379ffdaf41b4f89146cfad65619b, type: 2}
   navigable: 1
   flammable: 1
-  movementRange: 1.5
+  movementRange: 1

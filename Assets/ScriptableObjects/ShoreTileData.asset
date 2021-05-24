@@ -15,4 +15,5 @@ MonoBehaviour:
   tiles:
   - {fileID: 11400000, guid: 0a6b47043c2173f4390b40288eebc923, type: 2}
   navigable: 1
-  movementRange: 1
+  flammable: 0
+  movementRange: 1.5
