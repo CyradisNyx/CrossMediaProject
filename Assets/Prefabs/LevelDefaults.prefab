@@ -6410,7 +6410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisLevel: 1
-  maxTurns: 5
+  maxTurns: 6
   resetOnLoad: 0
 --- !u!1 &4671775539610886097
 GameObject:
