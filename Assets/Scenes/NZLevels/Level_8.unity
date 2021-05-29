@@ -3378,6 +3378,11 @@ PrefabInstance:
       propertyPath: maxTurns
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 8965170531941164700, guid: 62d20f56b4d802b449a1b99f0f1a8374,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62d20f56b4d802b449a1b99f0f1a8374, type: 3}
 --- !u!4 &587427377 stripped
